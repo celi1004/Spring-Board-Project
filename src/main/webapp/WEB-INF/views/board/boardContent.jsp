@@ -37,8 +37,8 @@
 
 	//click delete button
 	$(document).on('click', '#btnDelete', function(){
-    var url = "${pageContext.request.contextPath}/board/deleteBoard";
-    url = url + "?bid=" + ${boardContent.bid};
+    	var url = "${pageContext.request.contextPath}/board/deleteBoard";
+    	url = url + "?bid=" + ${boardContent.bid};
 		location.href = url;
 	});
 	

@@ -59,7 +59,7 @@
 
 	
 
-	<insert id="insertBoard" parameterType="com.jiny.web.board.model.BoardVO">
+	<insert id="insertBoard" parameterType="com.jiny.web.board.model.BoardVO" useGeneratedKeys="true" keyProperty="bid" keyColumn="bid">
 		INSERT INTO TBL_BOARD (CATE_CD, TITLE, CONTENT, TAG, VIEW_CNT, REG_ID, REG_DT, EDIT_DT)
 		VALUES (
 			#{cate_cd}
