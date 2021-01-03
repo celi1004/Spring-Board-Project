@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<!-- login --> 
+	<definition name="login-layout" template="/WEB-INF/tiles/layouts/login_layout.jsp"> </definition> 
+	<definition name="login/*" extends="login-layout">
+		<put-attribute name="tile_body" value="/WEB-INF/views/login/{1}.jsp" /> 
+	</definition>
+	
+	<!-- base -->
+	<definition name="base-layout" template="/WEB-INF/tiles/layouts/base_layout.jsp">
+		<put-attribute name="tile_header" value="/WEB-INF/tiles/layouts/header.jsp" />
+		<put-attribute name="tile_footer" value="/WEB-INF/tiles/layouts/footer.jsp" /> 
+	</definition> 
+	
+	<definition name="board/*" extends="base-layout"> 
+		<put-attribute name="tile_body" value="/WEB-INF/views/board/{1}.jsp" /> 
+	</definition>
+	
+	<definition name="user/*" extends="base-layout"> 
+		<put-attribute name="tile_body" value="/WEB-INF/views/user/{1}.jsp" /> 
+	</definition>
+	
+	<definition name="error/*" extends="base-layout"> 
+		<put-attribute name="tile_body" value="/WEB-INF/views/error/{1}.jsp" /> 
+	</definition> 
+	
+	<definition name="menu/*" extends="base-layout"> 
+		<put-attribute name="tile_body" value="/WEB-INF/views/menu/{1}.jsp" /> 
+	</definition> 
+	
+	<definition name="home" extends="base-layout"> 
+		<put-attribute name="tile_body" value="/WEB-INF/views/home.jsp" /> 
+	</definition> 
+
+</tiles-definitions>

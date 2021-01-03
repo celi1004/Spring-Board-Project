@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" 
+				"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiny.web.menu.menuMapper">
+
+	<select id="getMenuList" resultType="com.jiny.web.menu.model.MenuVO">
+		SELECT MID , CODE , CODENAME , SORT_NUM , COMMENT
+		FROM TBL_MENU
+		ORDER BY SORT_NUM ASC, CODE ASC 
+	</select>
+	
+	<insert id="insertMenu" parameterType="com.jiny.web.menu.model.MenuVO">
+		INSERT INTO TBL_MENU(CODE, CODENAME, SORT_NUM, COMMENT, REG_ID, REG_DT)
+			VALUES ( #{code} , #{codename} , #{sort_num} , #{comment} , #{reg_id} , now() )
+	</insert>
+	
+	<update id="updateMenu" parameterType="com.jiny.web.menu.model.MenuVO">
+		UPDATE TBL_MENU
+		SET CODENAME = #{codename} , COMMENT = #{comment} , SORT_NUM = #{sort_num} 
+		WHERE CODE = #{code}
+	</update>
+	
+	<delete id="deleteMenu" parameterType="String">
+		DELETE FROM TBL_MENU
+		WHERE CODE = #{code}
+	</delete>
+	
+</mapper>
