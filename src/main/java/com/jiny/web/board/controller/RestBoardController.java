@@ -1,6 +1,7 @@
 package com.jiny.web.board.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,22 +47,26 @@ public class RestBoardController {
 				//get filename 
 				String filename = fileload.getOriginalFilename();
 				
-				//set upload path
-				String fuploadPath = req.getServletContext().getRealPath("/resources/images/upload");
-				
+				//image path should be absolute path
+				//if not image will save at wacky directory
+				String fuploadPath = "C:\\Users\\pjpp8\\eclipse-workspace\\JinyBoard\\src\\main\\webapp\\resources\\images\\upload";
 				File file = new File(fuploadPath + "/" + filename);
 				
-				FileUtils.writeByteArrayToFile(file, fileload.getBytes());
+				//create actual file
+				FileOutputStream fos = new FileOutputStream(fuploadPath + "/" + filename);
+				fos.write(fileload.getBytes());
+				fos.close();
 				
+				//make Json which transfer to jsp
 				JSONObject outData = new JSONObject();
 				
 				outData.put("uploaded", true);
 				outData.put("url", "/resources/images/upload/"+filename);
 				
-				
 				logger.info("upload success"+filename +", " +fuploadPath);
 				return outData.toString();
 			}catch (Exception e) {
+				
 				logger.info("upload fail ");
 				JSONObject outData = new JSONObject();
 				outData.put("uploaded", false);

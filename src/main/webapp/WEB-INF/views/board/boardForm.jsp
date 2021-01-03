@@ -49,6 +49,7 @@
 		
 		var mode = '<c:out value="${mode}"/>';
 		
+		//ckeditor ready
 	    ClassicEditor
         	.create( document.querySelector( '#content' ),{
         		alignment:{
