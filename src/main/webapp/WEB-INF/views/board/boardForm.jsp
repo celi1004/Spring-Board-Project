@@ -6,10 +6,11 @@
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+
 
 <c:url var="getMenuListURL" value="/restMenu/getMenuList"></c:url>
-	
+
 <!DOCTYPE html>
 
 <html>
@@ -23,7 +24,6 @@
 }
 </style>
 <title>board</title>
-
 
 <script>
 	var contentEditor;
@@ -50,7 +50,18 @@
 		var mode = '<c:out value="${mode}"/>';
 		
 	    ClassicEditor
-        	.create( document.querySelector( '#content' ) )
+        	.create( document.querySelector( '#content' ),{
+        		alignment:{
+        			options: ['left', 'center', 'right']
+        		},
+        		image : {
+        				toolbar: ['imageTextAlternative','imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:side'],
+        				styles: ['full', 'alignLeft','alignRight', 'side']
+        		},
+        		ckfinder: {
+        			uploadUrl: '/restBoard/fileUpload'
+        		}
+        	} )
         	.then ( editor => {
         		contentEditor = editor;
         		if(mode == 'edit'){

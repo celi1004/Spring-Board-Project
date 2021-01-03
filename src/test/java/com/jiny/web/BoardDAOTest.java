@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.jiny.web.board.dao.BoardDAO;
 import com.jiny.web.board.model.BoardVO;
+import com.jiny.web.common.Search;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -28,7 +29,7 @@ public class BoardDAOTest{
 	
 	@Test @Ignore
 	public void testGetBoardList() throws Exception{
-		List<BoardVO> boardList = boardDAO.getBoardList();
+		List<BoardVO> boardList = boardDAO.getBoardList(new Search());
 		logger.info("\n Board List \n ");
 
 		if(boardList.size() > 0) {
