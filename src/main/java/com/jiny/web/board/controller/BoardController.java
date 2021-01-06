@@ -77,6 +77,7 @@ public class BoardController {
 	@RequestMapping(value="/saveBoard", method = RequestMethod.POST)
 	public String saveBoard(@ModelAttribute("BoardVO") BoardVO boardVO, @RequestParam("mode") String mode, RedirectAttributes rttr) throws Exception{
 		
+		int bid = 0;
 		if(mode.equals("edit")) {
 			boardService.updateBoard(boardVO);
 		}else {

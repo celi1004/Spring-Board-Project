@@ -45,24 +45,24 @@
 
 <article>
 	<div class="container">
-		<h2>User list</h2>
+		<h3 class="board_cate">User List</h3>
 			<div class="table-responsive">
-				<table class="table table-striped table-sm">
+				<table class="table table-sm" style="text-align:center;">
 					<colgroup> 
 						<col style="width:auto;" /> 
 						<col style="width:25%;" /> 
 						<col style="width:25%;" /> 
-						<col style="width:15%;" /> 
+						<col style="width:10%;" /> 
 						<col style="width:15%;" /> 
 					</colgroup> 
 					
 					<thead> 
 						<tr> 
-							<th>USER ID</th> 
-							<th>USER NAME</th> 
-							<th>EMAIL</th> 
-							<th>GRADE</th> 
-							<th>가입일</th> 
+							<th>User ID</th> 
+							<th>User Name</th> 
+							<th>E-Mail</th> 
+							<th>Grade</th> 
+							<th>Joined</th> 
 						</tr> 
 					</thead> 
 					
@@ -91,8 +91,8 @@
 			</div> 
 			
 			<!-- pagination{s} -->
-			<div id="paginationBox"> 
-				<ul class="pagination"> 
+			<div id="paginationBox" style="margin:20px;"> 
+				<ul class="pagination justify-content-center"> 
 					<c:if test="${pagination.prev}"> 
 						<li class="page-item">
 							<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.searchType}', '${pagination.keyword}')">Previous</a>
@@ -114,25 +114,6 @@
 			</div> 
 			<!-- pagination{e} --> 
 			
-			<!-- search{s} --> 
-			<div class="form-group row justify-content-center"> 
-				<div style="padding-right:10px"> 
-					<select class="form-control form-control-sm" name="searchType" id="searchType"> 
-						<option value="title" <c:if test="${pagination.searchType eq 'title'}">selected</c:if> >제목</option> 
-						<option value="content" <c:if test="${pagination.searchType eq 'content'}">selected</c:if>>본문</option> 
-						<option value="reg_id" <c:if test="${pagination.searchType eq 'reg_id'}">selected</c:if>>작성자</option> 
-					</select> 
-				</div> 
-				
-				<div style="padding-right:10px"> 
-					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" value="${pagination.keyword}"> 
-				</div> 
-				
-				<div> 
-					<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button> 
-				</div>
-			</div>
-			<!-- search{e} -->
 			
 	</div>
 </article>

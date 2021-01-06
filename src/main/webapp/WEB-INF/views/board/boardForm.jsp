@@ -115,7 +115,7 @@
 					<label for="cate_cd">카테고리</label>
 					<form:select path="cate_cd" class="form-control form-control-sm" name="category" id="category">
 						<c:forEach items="${categoryList}" var="category">
-							<form:option value="${category.code}" label="${category.codename}"/>
+							<form:option value="${category.code}" label="${category.code}"/>
 						</c:forEach>
 					</form:select>
 				</div>
@@ -141,9 +141,9 @@
 				</div>
 
 			</form:form>
-			<div >
-				<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
-				<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
+			<div class="d-grid gap-4 col-2 mx-auto">
+				<button type="button" class="btn btn-primary" id="btnSave">저장</button>
+				<button type="button" class="btn btn-primary" id="btnList">목록</button>
 			</div>
 		</div>
 	</article>

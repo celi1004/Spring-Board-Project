@@ -23,7 +23,7 @@
 
 	// move to board list
 	$(document).on('click', '#btnList', function(){
-		location.href = "${pageContext.request.contextPath}/board/getBoardList";
+		location.href = "${pageContext.request.contextPath}/board/getBoardList?category="+"${boardContent.cate_cd}";
 	});
 	
 	//click modify button
@@ -54,15 +54,11 @@
 			success: function(result){
 				var htmls = "";
 				if(result.length < 1){
-					htmls = "등록된 댓글이 없습니다.";
+					htmls = "<div class='board_cate' style='font-size:10pt;'>등록된 댓글이 없습니다.</div>";
 				}else{
 					$(result).each(function(){
 						htmls += '<div class="media text-muted pt-3" id="rid'+this.rid+'">';
-						htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:32x32">';
-	                    htmls += '<title>Placeholder</title>';
-	                    htmls += '<rect width="100%" height="100%" fill="#007bff"></rect>';
-	                    htmls += '<text x="50%" fill="#007bff" dy=".3em">32x32</text>';
-	                    htmls += '</svg>';
+						htmls += '<img src="/resources/images/icon/profile.png" style="width:32px;heigth:32px;margin-right:10px;"></img>';
 	                    htmls += '<p class="media-body pb-3 mb-0 small lh-125 border-bottom horder-gray">';
 	                    htmls += '<span class="d-block">';
 	                    htmls += '<strong class="text-gray-dark">' + this.reg_id + '</strong>';
@@ -85,31 +81,35 @@
 	$(document).on('click', '#btnReplySave', function(){
 		var replyContent = $('#content').val();
 		var replyReg_id = $('#reg_id').val();
-
-		var paramData = JSON.stringify({"content": replyContent
+		
+		if(replyContent=="" || replyReg_id==""){
+			alert("댓글 내용과 작성자 이름을 입력해주세요.");
+		}else{
+			var paramData = JSON.stringify({"content": replyContent
 				, "reg_id": replyReg_id
 				, "bid":'${boardContent.bid}'
-		});
+			});
 		
-		var headers = {"Content-Type" : "application/json"
-				, "X-HTTP-Method-Override" : "POST"};
-
-		$.ajax({
-			url: "${pageContext.request.contextPath}/restBoard/saveReply"
-			, headers : headers
-			, data : paramData
-			, type : 'POST'
-			, dataType : 'text'
-			, success: function(result){
-				showReplyList();
-
-				$('#content').val('');
-				$('#reg_id').val('');
-			}
-			, error: function(error){
-				console.log("에러 : " + error);
-			}
-		});
+			var headers = {"Content-Type" : "application/json"
+					, "X-HTTP-Method-Override" : "POST"};
+	
+			$.ajax({
+				url: "${pageContext.request.contextPath}/restBoard/saveReply"
+				, headers : headers
+				, data : paramData
+				, type : 'POST'
+				, dataType : 'text'
+				, success: function(result){
+					showReplyList();
+	
+					$('#content').val('');
+					$('#reg_id').val('');
+				}
+				, error: function(error){
+					console.log("에러 : " + error);
+				}
+			});
+		}
 	});
 	
 	function fn_editReply(rid, reg_id, content){
@@ -117,11 +117,8 @@
 		var htmls = "";
 
 		htmls += '<div class="media text-muted pt-3" id="rid' + rid + '">';
-		htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:32x32">';
-		htmls += '<title>Placeholder</title>';
-		htmls += '<rect width="100%" height="100%" fill="#007bff"></rect>';
-		htmls += '<text x="50%" fill="#007bff" dy=".3em">32x32</text>';
-		htmls += '</svg>';
+		
+		htmls += '<img src="/resources/images/icon/profile.png" style="width:32px;heigth:32px;margin-right:10px;"></img>';
 		htmls += '<p class="media-body pb-3 mb-0 small lh-125 border-bottom horder-gray">';
 		htmls += '<span class="d-block">';
 		htmls += '<strong class="text-gray-dark">' + reg_id + '</strong>';
@@ -143,25 +140,29 @@
 	function fn_updateReply(rid, reg_id){
 
 		var replyEditContent = $('#editContent').val();
+		
+		if(replyEditContent != ""){
+			var paramData = JSON.stringify({"content": replyEditContent, "rid": rid});
 
-		var paramData = JSON.stringify({"content": replyEditContent, "rid": rid});
+			var headers = {"Content-Type" : "application/json", "X-HTTP-Method-Override" : "POST"};
 
-		var headers = {"Content-Type" : "application/json", "X-HTTP-Method-Override" : "POST"};
-
-		$.ajax({
-			url: "${pageContext.request.contextPath}/restBoard/updateReply"
-			, headers : headers
-			, data : paramData
-			, type : 'POST'
-			, dataType : 'text'
-			, success: function(result){
-                console.log(result);
-				showReplyList();
-			}
-			, error: function(error){
-				console.log("에러 : " + error);
-			}
-		});
+			$.ajax({
+				url: "${pageContext.request.contextPath}/restBoard/updateReply"
+				, headers : headers
+				, data : paramData
+				, type : 'POST'
+				, dataType : 'text'
+				, success: function(result){
+	                console.log(result);
+					showReplyList();
+				}
+				, error: function(error){
+					console.log("에러 : " + error);
+				}
+			});
+		}else{
+			alert("내용을 입력해주세요.");
+		}
 	}
 	
 	function fn_deleteReply(rid){
@@ -186,9 +187,124 @@
 </script>
 
 <style>
-img{
+.image img{
 	max-width: 100%!important;
 	height: auto!important;
+	display: block;
+	margin: 0px auto;
+	margin-bottom: 10px;
+}
+
+.board_content::after{
+	display: block;
+	content:"";
+	clear: both
+}
+
+figure{
+	position: relative;
+	display: block;
+	width: fit-content;
+	margin: 0px auto;
+}
+
+.image-style-align-left{
+	width: auto;
+}
+
+.image-style-side{
+	width: auto;
+}
+
+.image-style-align-left img{
+	float: left;
+	margin-right: 10px;
+}
+
+.image-style-side img{
+	float: right;
+}
+
+.image-style-align-left figcaption{
+	color: #fff;
+	background: #666;
+	position: absolute;
+	left: 0;
+	right: unset;
+	top: 0;
+	bottom: unset;
+	opacity: 0;
+	box-sizing: border-box;
+	padding: 4px;
+	transition: .5s;
+}
+
+.image-style-side figcaption{
+	color: #fff;
+	background: #666;
+	position: absolute;
+	left: unset;
+	right: 0;
+	top: 0;
+	bottom: unset;
+	opacity: 0;
+	box-sizing: border-box;
+	padding: 4px;
+	transition: .5s;
+}
+
+figcaption{
+	color: #fff;
+	background: #666;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+	box-sizing: border-box;
+	padding: 4px;
+	transition: .5s;
+	text-align: center;
+}
+
+figure:hover > figcaption{
+	opacity: .8;
+}
+
+.board_line{
+	margin:30px;
+}
+
+.btn-primary{
+	background-color: #8b8687;
+	border-color: #8b8687;
+}
+
+.btn-primary:active,
+.btn-primary:hover{
+	background-color: #333030;
+	border-color: #333030;
+}
+
+.btn-primary:focus{
+	box-shadow: 0 0 0 0.2rem rgba(171,208,206,0.9);
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle{
+ 	background-color: #a3a1a1;
+    border-color: #ABD0CE;
+  }
+ 
+ .btn-primary:not(:disabled):not(.disabled).active:focus,
+ .btn-primary:not(:disabled):not(.disabled):active:focus,
+ .show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(171,208,206,0.9);
+}
+
+.tag_line{
+	
 }
 </style>
 
@@ -198,24 +314,32 @@ img{
 	<article>
 		<div class="container" role="main">
 
-			<h2 class="board_cate">board Content</h2>
+			<div class="board_cate">Category > <c:out value="${boardContent.cate_cd}"/></div>
 
 			<div class="bg-white rounded shadow-sm">
 				<div class="board_title"><c:out value="${boardContent.title}"/></div>
 				
 				<div class="board_info_box">
-					<span class="board_author"><c:out value="${boardContent.reg_id}"/>,</span><span class="board_date"><c:out value="${boardContent.reg_dt}"/></span>
+					<span class="board_author"><c:out value="${boardContent.reg_id}"/>&nbsp;&nbsp;&nbsp;&nbsp;|</span><span class="board_date"><c:out value="${boardContent.reg_dt}"/></span>
 				</div>
 				
+				<hr class="board_line">
+				
 				<div class="board_content">${boardContent.content}</div>
-				<div class="board_tag">TAG : <c:out value="${boardContent.tag}"/></div>
+				
+				<div class="board_tag">TAG  &nbsp;:&nbsp;&nbsp;<c:out value="${boardContent.tag}"/></div>
 			</div>
 
-			<div style="margin-top : 20px">
-				<button type="button" class="btn btn-sm btn-primary" id="btnUpdate">수정</button>
-				<button type="button" class="btn btn-sm btn-primary" id="btnDelete">삭제</button>
-				<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
+			<div class="d-grid gap-4 col-3 mx-auto" style="margin-top : 30px">
+				<button type="button" class="btn btn-primary" id="btnUpdate" style="margin-top: 5px">수정</button>
+				<button type="button" class="btn btn-primary" id="btnDelete" style="margin-top: 5px">삭제</button>
+				<button type="button" class="btn btn-primary" id="btnList" style="margin-top: 5px">목록</button>
 			</div>
+			
+			<!-- login on admin
+			<div class="d-grid gap-4 col-1 mx-auto" style="margin-top : 30px">
+				<button type="button" class="btn btn-primary" id="btnList">목록</button>
+			</div> -->
 			
 			<!-- Reply Form {s} -->
 			<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px">

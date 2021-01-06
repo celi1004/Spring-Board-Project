@@ -22,7 +22,7 @@
 						var list = result.menuList;
 						var htmls = '<li><a class="dropdown-item" href="#" onClick="fn_goToCate(\'all\')">All Posts</a></li>';
 						result.menuList.forEach(function(e) {
-							htmls += '<li><a class="dropdown-item" href="#" onClick="fn_goToCate('+'\''+e.codename+'\''+')">'+e.codename+'</a></li>';
+							htmls += '<li><a class="dropdown-item" href="#" onClick="fn_goToCate('+'\''+e.code+'\''+')">'+e.code+'</a></li>';
 							
 						});
 						htmls += '<li><hr class="dropdown-divider"></li>';
@@ -58,6 +58,18 @@
   z-index: 10000;
   min-height: 4rem;
   box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
+}
+
+.btn-outline-success{
+	color: #9DC3C1;
+	border-color: #9DC3C1;
+}
+
+.btn-outline-success:hover{
+	color: #fff;
+	background-color:#9DC3C1; 
+	border-color: #9DC3C1;
+
 }
 </style>
 
