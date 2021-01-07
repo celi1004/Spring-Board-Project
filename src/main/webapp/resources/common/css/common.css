@@ -65,9 +65,13 @@ a:hover{
 	font-weight: bold;
 }
 
+.form-control:focus{
+	
+}
+
 .btn-primary{
-	background-color: #8b8687;
-	border-color: #8b8687;
+	background-color: #7C7877;
+	border-color: #7C7877;
 }
 
 .btn-primary:active,
@@ -91,4 +95,43 @@ a:hover{
  .btn-primary:not(:disabled):not(.disabled):active:focus,
  .show>.btn-primary.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem rgba(171,208,206,0.9);
+}
+
+.btn-outline-success:not(:disabled):not(.disabled).active,
+.btn-outline-success:not(:disabled):not(.disabled):active,
+.show>.btn-outline-success.dropdown-toggle {
+	background-color: #6d9d88;
+	border-color: #6d9d88;
+}
+
+.btn-outline-success:not(:disabled):not(.disabled).active:focus,
+.btn-outline-success:not(:disabled):not(.disabled):active:focus,
+.show>.btn-outline-success.dropdown-toggle:focus,
+.btn-outline-success.focus, .btn-outline-success:focus{
+	box-shadow: 0 0 0 0.2rem rgba(171,208,206,0.9);
+}
+
+.form-control:focus{
+	border-color: #9DC3C1;
+	box-shadow: 0 0 0 0.2rem rgb(171,208,206,0.6);
+}
+
+.page-link{
+	color: #6E7783;
+	border: 1px solid #D8E6E7;
+}
+
+.page-item.active .page-link{
+	background-color: #b4d6c9;
+	border-color: #c6e5d9;
+}
+
+.page-link:hover{
+	color: #333030;
+	background-color: #dcf3f1;
+	
+}
+
+.page-link:focus{
+	box-shadow: 0 0 0 0.2rem rgba(171,208,206,0.7);
 }

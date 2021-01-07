@@ -274,38 +274,6 @@ figure:hover > figcaption{
 .board_line{
 	margin:30px;
 }
-
-.btn-primary{
-	background-color: #8b8687;
-	border-color: #8b8687;
-}
-
-.btn-primary:active,
-.btn-primary:hover{
-	background-color: #333030;
-	border-color: #333030;
-}
-
-.btn-primary:focus{
-	box-shadow: 0 0 0 0.2rem rgba(171,208,206,0.9);
-}
-
-.btn-primary:not(:disabled):not(.disabled).active,
-.btn-primary:not(:disabled):not(.disabled):active,
-.show>.btn-primary.dropdown-toggle{
- 	background-color: #a3a1a1;
-    border-color: #ABD0CE;
-  }
- 
- .btn-primary:not(:disabled):not(.disabled).active:focus,
- .btn-primary:not(:disabled):not(.disabled):active:focus,
- .show>.btn-primary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.2rem rgba(171,208,206,0.9);
-}
-
-.tag_line{
-	
-}
 </style>
 
 </head>
@@ -331,9 +299,9 @@ figure:hover > figcaption{
 			</div>
 
 			<div class="d-grid gap-4 col-3 mx-auto" style="margin-top : 30px">
-				<button type="button" class="btn btn-primary" id="btnUpdate" style="margin-top: 5px">수정</button>
-				<button type="button" class="btn btn-primary" id="btnDelete" style="margin-top: 5px">삭제</button>
-				<button type="button" class="btn btn-primary" id="btnList" style="margin-top: 5px">목록</button>
+				<button type="button" class="btn btn-sm btn-primary" id="btnUpdate" style="margin-top: 5px">수정</button>
+				<button type="button" class="btn btn-sm btn-primary" id="btnDelete" style="margin-top: 5px">삭제</button>
+				<button type="button" class="btn btn-sm btn-primary" id="btnList" style="margin-top: 5px">목록</button>
 			</div>
 			
 			<!-- login on admin

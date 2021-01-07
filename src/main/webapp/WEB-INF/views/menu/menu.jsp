@@ -183,8 +183,8 @@
 	<div class="table-responsive">
 		<table class="table table-sm" style="text-align:center;">
 			<colgroup>
-				<col style="width:10%; " />
-				<col style="width:20%;" />
+				<col style="width:20%; " />
+				<col style="width:15%;" />
 				<col style="width:25%;" />
 				<col style="width:auto;" />
 			</colgroup>

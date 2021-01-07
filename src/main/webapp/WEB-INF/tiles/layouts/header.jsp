@@ -67,8 +67,8 @@
 
 .btn-outline-success:hover{
 	color: #fff;
-	background-color:#9DC3C1; 
-	border-color: #9DC3C1;
+	background-color:#b4d6c9; 
+	border-color: #b4d6c9;
 
 }
 </style>

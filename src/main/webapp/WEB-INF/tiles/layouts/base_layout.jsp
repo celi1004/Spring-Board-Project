@@ -15,7 +15,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- common CSS -->
-<link rel="stylesheet" href="<c:url value='/resources/common/css/common.css?ver=1'/>" > 
+<link rel="stylesheet" href="<c:url value='/resources/common/css/common.css?ver=1.2'/>" > 
 
 <%@ include file="/WEB-INF/tiles/layouts/header.jsp"%>
 

@@ -36,11 +36,11 @@
 			<div class="table-responsive">
 				<table class="table table-sm" style="text-align:center;">
 					<colgroup> 
-						<col style="width:auto;" /> 
+						<col style="width:20%;" /> 
+						<col style="width:20%;" /> 
 						<col style="width:25%;" /> 
-						<col style="width:25%;" /> 
-						<col style="width:10%;" /> 
 						<col style="width:15%;" /> 
+						<col style="width:20%;" /> 
 					</colgroup> 
 					
 					<thead> 
@@ -57,7 +57,7 @@
 						<c:choose> 
 							<c:when test="${empty userList }" > 
 								<tr>
-									<td colspan="5" align="center">데이터가 없습니다.</td>
+									<td colspan="5" align="center">No Data.</td>
 								</tr> 
 							</c:when> 
 							
