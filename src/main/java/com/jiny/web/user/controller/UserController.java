@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jiny.web.common.Pagination;
 import com.jiny.web.user.model.UserVO;
 import com.jiny.web.user.service.UserService; 
 
@@ -24,9 +25,21 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/getUserList", method = RequestMethod.GET)
-	public String getUserList(Model model) throws Exception{ 
+	public String getUserList(Model model
+			, @RequestParam(required = false, defaultValue = "1") int page
+			, @RequestParam(required = false, defaultValue = "1") int range
+			) throws Exception{
+		
+		Pagination pagination = new Pagination();
+		
+		int listCnt = userService.getUserListCnt();
+		
+		pagination.pageInfo(page, range, listCnt);
+		
 		logger.info("getUserList()....");
-		model.addAttribute("userList", userService.getUserList());
+		
+		model.addAttribute("pagination", pagination);
+		model.addAttribute("userList", userService.getUserList(pagination));
 		return "user/userList";
 	}
 	

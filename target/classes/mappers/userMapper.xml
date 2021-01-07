@@ -2,31 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jiny.web.user.userMapper">
 
-<select id="getUserInfo" resultType="com.jiny.web.user.model.UserVO">
- SELECT UID , NAME , PWD , EMAIL , GRADE , REG_DT FROM TBL_USER WHERE UID = #{uid} 
- </select>
+	<select id="getUserInfo" resultType="com.jiny.web.user.model.UserVO">
+	 SELECT UID , NAME , PWD , EMAIL , GRADE , REG_DT FROM TBL_USER WHERE UID = #{uid} 
+	 </select>
+	 
+	 <select id="getUserList" resultType="com.jiny.web.user.model.UserVO">
+	 	SELECT 
+	 		UID , NAME , PWD , EMAIL , GRADE , REG_DT
+	 	FROM 
+	 		TBL_USER
+	 	LIMIT #{startList}, #{listSize}
+	 </select>
+	 
+	 <insert id="insertUser" parameterType="com.jiny.web.user.model.UserVO">
+		INSERT INTO TBL_USER (UID, NAME, PWD, EMAIL, REG_DT)
+			VALUES ( #{uid} , #{name} , #{pwd} , #{email} , now() )
+	 </insert>
+	 
+	 <update id="updateUser" parameterType="com.jiny.web.user.model.UserVO">
+	 	UPDATE TBL_USER SET NAME = #{name} 
+	 						, PWD = #{pwd}
+	 						, EMAIL = #{email} 
+	 						, GRADE = #{grade} 
+	 			WHERE UID = #{uid}
+	 </update>
+	 
+	 <delete id="deleteUser" parameterType="int">
+	 	DELETE FROM TBL_USER
+	 	WHERE UID = #{uid}
+	 </delete>
  
- <select id="getUserList" resultType="com.jiny.web.user.model.UserVO">
- 	SELECT UID , NAME , PWD , EMAIL , GRADE , REG_DT
- 	FROM TBL_USER
- </select>
- 
- <insert id="insertUser" parameterType="com.jiny.web.user.model.UserVO">
-	INSERT INTO TBL_USER (UID, NAME, PWD, EMAIL, REG_DT)
-		VALUES ( #{uid} , #{name} , #{pwd} , #{email} , now() )
- </insert>
- 
- <update id="updateUser" parameterType="com.jiny.web.user.model.UserVO">
- 	UPDATE TBL_USER SET NAME = #{name} 
- 						, PWD = #{pwd}
- 						, EMAIL = #{email} 
- 						, GRADE = #{grade} 
- 			WHERE UID = #{uid}
- </update>
- 
- <delete id="deleteUser" parameterType="int">
- 	DELETE FROM TBL_USER
- 	WHERE UID = #{uid}
- </delete>
- 
+	 <select id="getUserListCnt" resultType="int">
+		SELECT
+			count(*) as listCnt
+		FROM
+			TBL_USER
+	</select>
+	
  </mapper>

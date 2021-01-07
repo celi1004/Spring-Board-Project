@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.jiny.web.common.Pagination;
 import com.jiny.web.user.model.UserVO;
 
 @Repository
@@ -15,8 +16,8 @@ public class UserDAOImpl implements UserDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<UserVO> getUserList() throws Exception {
-		return sqlSession.selectList("com.jiny.web.user.userMapper.getUserList");
+	public List<UserVO> getUserList(Pagination pagination) throws Exception {
+		return sqlSession.selectList("com.jiny.web.user.userMapper.getUserList", pagination);
 	}
 	
 	@Override
@@ -37,5 +38,10 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public int deleteUser(String uid) throws Exception{
 		return sqlSession.delete("com.jiny.web.user.userMapper.deleteUser", uid);
+	}
+	
+	@Override
+	public int getUserListCnt() throws Exception{
+		return sqlSession.selectOne("com.jiny.web.user.userMapper.getUserListCnt");
 	}
 }

@@ -8,20 +8,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.jiny.web.common.Pagination;
 import com.jiny.web.user.dao.UserDAO;
 import com.jiny.web.user.model.UserVO;
 
 @Service
 public class UserServiceImple implements UserService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserServiceImple.class);
-	
 	@Inject
 	private UserDAO userDAO;
 	
 	@Override
-	public List<UserVO> getUserList() throws Exception{
-		return userDAO.getUserList();
+	public List<UserVO> getUserList(Pagination pagination) throws Exception{
+		return userDAO.getUserList(pagination);
 	}
 	
 	@Override
@@ -42,6 +41,11 @@ public class UserServiceImple implements UserService {
 	@Override
 	public void deleteUser(String uid) throws Exception{
 		userDAO.deleteUser(uid);
+	}
+	
+	@Override
+	public int getUserListCnt() throws Exception{
+		return userDAO.getUserListCnt();
 	}
 	
 }

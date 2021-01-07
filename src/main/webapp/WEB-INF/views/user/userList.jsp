@@ -2,43 +2,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script>
-	$(document).on('click', '#btnSearch', function(e){
-		e.preventDefault(); 
-		var url = "${getBoardListURL}"; 
-		url = url + "?searchType=" + $('#searchType').val(); 
-		url = url + "&keyword=" + $('#keyword').val(); 
-		console.log(url); 
-		location.href = url;
-	}); 
+
 	
-	function fn_prev(page, range, rangeSize, searchType, keyword) {
+	function fn_prev(page, range, rangeSize) {
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
 		var url = "${globalCtx}/user/getUserList";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
-		url = url + "&searchType=" + searchType;
-		url = url + "&keyword=" + keyword;
 		location.href = url;
 	} 
 	
-	function fn_pagination(page, range, rangeSize, searchType, keyword) {
+	function fn_pagination(page, range, rangeSize) {
 		var url = "${getUserListURL}";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
-		url = url + "&searchType=" + searchType;
-		url = url + "&keyword=" + keyword;
 		console.log(url); location.href = url; 
 	} 
 	
-	function fn_next(page, range, rangeSize, searchType, keyword) { 
+	function fn_next(page, range, rangeSize) { 
 		var page = parseInt((range * rangeSize)) + 1;
 		var range = parseInt(range) + 1;
 		var url = "${globalCtx}/user/getUserList";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
-		url = url + "&searchType=" + searchType;
-		url = url + "&keyword=" + keyword;
 		location.href = url;
 	}
 </script>
@@ -95,19 +82,19 @@
 				<ul class="pagination justify-content-center"> 
 					<c:if test="${pagination.prev}"> 
 						<li class="page-item">
-							<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.searchType}', '${pagination.keyword}')">Previous</a>
+							<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}')">Previous</a>
 						</li> 
 					</c:if>
 					
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 						<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
-							<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.searchType}', '${pagination.keyword}' )"> ${idx} </a>
+							<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}' )"> ${idx} </a>
 						</li> 
 					</c:forEach>
 					
 					<c:if test="${pagination.next}"> 
 						<li class="page-item">
-							<a class="page-link" href="#" onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.searchType}', '${pagination.keyword}')">Next</a>
+							<a class="page-link" href="#" onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Next</a>
 						</li> 
 					</c:if> 
 				</ul> 
