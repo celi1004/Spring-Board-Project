@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
 <!-- Custom styles for this template -->
-<link rel="stylesheet" href="<c:url value='/resources/common/css/loginin.css'/>" >
+<link rel="stylesheet" href="<c:url value='/resources/common/css/loginin.css?ver=1.1'/>" >
 
 <style>
 	body{padding : 0px}

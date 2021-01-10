@@ -54,7 +54,7 @@
 			success: function(result){
 				var htmls = "";
 				if(result.length < 1){
-					htmls = "<div class='board_cate' style='font-size:10pt;'>등록된 댓글이 없습니다.</div>";
+					htmls = "<div class='board_cate' style='font-size:10pt;'>No Reply</div>";
 				}else{
 					$(result).each(function(){
 						htmls += '<div class="media text-muted pt-3" id="rid'+this.rid+'">';
@@ -63,8 +63,8 @@
 	                    htmls += '<span class="d-block">';
 	                    htmls += '<strong class="text-gray-dark">' + this.reg_id + '</strong>';
 	                    htmls += '<span style="padding-left: 7px; font-size: 9pt">';
-	                    htmls += '<a href="javascript:void(0)" onclick="fn_editReply(' + this.rid + ', \'' + this.reg_id + '\', \'' + this.content + '\' )" style="padding-right:5px">수정</a>';
-	                    htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + this.rid + ')" >삭제</a>';
+	                    htmls += '<a href="javascript:void(0)" onclick="fn_editReply(' + this.rid + ', \'' + this.reg_id + '\', \'' + this.content + '\' )" style="padding-right:5px">Modify</a>';
+	                    htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + this.rid + ')" >Delete</a>';
 	                    htmls += '</span>';
 	                    htmls += '</span>';
 	                    htmls += this.content;
@@ -123,8 +123,8 @@
 		htmls += '<span class="d-block">';
 		htmls += '<strong class="text-gray-dark">' + reg_id + '</strong>';
 		htmls += '<span style="padding-left: 7px; font-size: 9pt">';
-		htmls += '<a href="javascript:void(0)" onclick="fn_updateReply(' + rid + ', \'' + reg_id + '\')" style="padding-right:5px">저장</a>';
-		htmls += '<a href="javascript:void(0)" onClick="showReplyList()">취소<a>';
+		htmls += '<a href="javascript:void(0)" onclick="fn_updateReply(' + rid + ', \'' + reg_id + '\')" style="padding-right:5px">Save</a>';
+		htmls += '<a href="javascript:void(0)" onClick="showReplyList()">Cancel<a>';
 		htmls += '</span>';
 		htmls += '</span>';		
 		htmls += '<textarea name="editContent" id="editContent" class="form-control" rows="3">';
@@ -299,9 +299,9 @@ figure:hover > figcaption{
 			</div>
 
 			<div class="d-grid gap-4 col-3 mx-auto" style="margin-top : 30px">
-				<button type="button" class="btn btn-sm btn-primary" id="btnUpdate" style="margin-top: 5px">수정</button>
-				<button type="button" class="btn btn-sm btn-primary" id="btnDelete" style="margin-top: 5px">삭제</button>
-				<button type="button" class="btn btn-sm btn-primary" id="btnList" style="margin-top: 5px">목록</button>
+				<button type="button" class="btn btn-sm btn-primary" id="btnUpdate" style="margin-top: 5px; width:60px;">Modify</button>
+				<button type="button" class="btn btn-sm btn-primary" id="btnDelete" style="margin-top: 5px; width:60px;">Delete</button>
+				<button type="button" class="btn btn-sm btn-primary" id="btnList" style="margin-top: 5px; width:60px;">List</button>
 			</div>
 			
 			<!-- login on admin
@@ -315,12 +315,12 @@ figure:hover > figcaption{
 				<form:hidden path="bid" id="bid"/>
 				<div class="row">
 					<div class="col-sm-10">
-						<form:textarea path="content" id="content" class="form-control" rows="3" placeholder="댓글을 입력해 주세요"></form:textarea>
+						<form:textarea path="content" id="content" class="form-control" rows="3" placeholder="Please enter the reply"></form:textarea>
 					</div>
 
 					<div class="col-sm-2">
-						<form:input path="reg_id" class="form-control" id="reg_id" placeholder="댓글 작성자"></form:input>
-						<button type="button" class="btn btn-sm btn-primary" id="btnReplySave" style="width: 100%; margin-top: 10px"> 저 장 </button>
+						<form:input path="reg_id" class="form-control" id="reg_id" placeholder="Username"></form:input>
+						<button type="button" class="btn btn-sm btn-primary" id="btnReplySave" style="width: 100%; margin-top: 10px"> Save </button>
 					</div>
 				</div>
 				</form:form>

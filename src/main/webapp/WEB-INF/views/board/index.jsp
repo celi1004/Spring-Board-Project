@@ -10,7 +10,8 @@
 <meta charset="UTF-8">
 
 <title>board</title>
-	<script>
+
+<script>
 		$(document).on('click', '#btnWriteForm', function(e){
 			e.preventDefault();
 			location.href = "${pageContext.request.contextPath}/board/boardForm";
@@ -67,16 +68,26 @@
 		
 		// for search
 		$(document).on('click', '#btnSearch', function(e){
-			e.preventDefault();
-			console.log("btnSearch")
-			var url="${getBoardList}";
-			url = url + "?searchType=" + $('#searchType').val();
-			url = url + "&keyword=" + $('#keyword').val();
-			location.href = url;
-			console.log(url);
+			if($('#keyword').val() == ""){
+				alert("No keyword for search");
+			}else{
+				e.preventDefault();
+				console.log("btnSearch")
+				var url="${getBoardList}";
+				url = url + "?searchType=" + $('#searchType').val();
+				url = url + "&keyword=" + $('#keyword').val();
+				location.href = url;
+				console.log(url);
+			}
 		});
 		
-	</script>
+</script>
+
+<style type="text/css">
+	.table-hover tbody tr:hover{
+ 		background-color:rgb(220,243,241, 0.4);
+ 	}
+</style>
 
 </head>
 <body>
@@ -91,57 +102,77 @@
 					<c:otherwise>${pagination.category}</c:otherwise>
 				</c:choose>
 			</h2>
+			
+			
 				<table class="table table-hover table-sm">
 					<colgroup>
-						<col style="width:5%;" />
-						<col style="width:auto;" />
+						<col style="width:30%;" />
 						<col style="width:15%;" />
 						<col style="width:10%;" />
 						<col style="width:10%;" />
 					</colgroup>
 			
-					<thead>
-						<tr>
-							<th>NO</th>
-							<th>글제목</th>
-							<th>작성자</th>
-							<th>조회수</th>
-							<th>작성일</th>
-						</tr>
-					</thead>
 			
 					<tbody>
 						<c:choose>
 							<c:when test="${empty boardList }" >
-								<tr><td colspan="5" align="center">데이터가 없습니다.</td></tr>
+								<tr><td colspan="5" align="center">No data</td></tr>
 							</c:when> 
 							<c:when test="${!empty boardList}">
 								<c:forEach var="list" items="${boardList}">
 									<tr>
-										<td><c:out value="${list.bid}"/></td>
-										<td>
-											<a href="#" onClick="fn_contentView(<c:out value="${list.bid}"/>)">
-												<c:out value="${list.title}"/>
+										<td style="padding:10px;">
+											<a href="#" onClick="fn_contentView(<c:out value="${list.bid}"/>)" style="text-decoration:none;">
+												<div style="font-size:14pt; font-weight:550; margin-left:15px;">
+													<c:out value="${list.title}"/>
+												</div>
+					
+												<div style="color:#6E7783; font-size:10pt; float:left; margin-top:3px; margin-left:20px;">
+													<c:out value="${list.reg_id}"/>
+													&nbsp;&nbsp;,&nbsp;&nbsp;
+													<c:out value="${list.reg_dt}"/>
+												</div>
+												<div style="float:right; font-size: 8pt; color:#a3a1a1; width:50px; margin-top:3px;">
+													<img src="/resources/images/icon/view.png" style="width:16px;heigth:16px;margin-right:5px;"></img>
+													<span style=""><c:out value="${list.view_cnt}"/></span>
+												</div>
 											</a>
+											
 										</td>
-										<td><c:out value="${list.reg_id}"/></td>
-										<td><c:out value="${list.view_cnt}"/></td>
-										<td><c:out value="${list.reg_dt}"/></td>
 									</tr>
 								</c:forEach>
 							</c:when>
 						</c:choose>
 					</tbody>
 				</table>
-				
-			<div>
-				<button type="button" class="btn btn-sm btn-primary" id="btnWriteForm">글쓰기</button>
+			
+			<!-- search{s} -->
+			<div class="form-group row jusity-content-center" style="float:right; margin:5pt; margin-right:10pt; margin-bottom:30pt;">
+				<div class="w100" style="padding-right:10px">
+					<select class="form-control form-control-sm" name="searchType" id="searchType">
+						<option value="all">all</option>
+						<option value="title">title</option>
+						<option value="Content">content</option>
+						<option value="reg_id">writer</option>
+					</select>
+				</div>
+				<div class="w300" style="padding-right:10px">
+					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" value="${pagination.keyword}" >
+				</div>
+				<div>
+					<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">Search</button>
+				</div>
+			</div>
+			<!-- search{e} -->
+			
+			<div style="float:left; margin-left: 15pt; margin-top:5pt; margin-bottom:30pt;">
+				<button type="button" class="btn btn-sm btn-primary" id="btnWriteForm">Post</button>
 			</div>
 			
 			<br>
 			
 			<!-- pagination{s} -->
-			<div id="paginationBox">
+			<div id="paginationBox" style="clear:both;">
 				<ul class="pagination justify-content-center">
 					<c:if test="${pagination.prev}">
 						<li class="page-item"><a class="page-link" href="#" onClick="fn_prev('${pagination.category}', '${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${search.searchType}', '${search.keyword}')">Previous</a></li>
@@ -159,26 +190,7 @@
 				</ul>
 			</div>
 			<!-- pagination{e} -->
-			
-			<br>
-			
-			<!-- search{s} -->
-			<div class="form-group row jusity-content-center">
-				<div class="w100" style="padding-right:10px">
-					<select class="form-control form-control-sm" name="searchType" id="searchType">
-						<option value="title">제목</option>
-						<option value="Content">본문</option>
-						<option value="reg_id">작성자</option>
-					</select>
-				</div>
-				<div class="w300" style="padding-right:10px">
-					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" value="${pagination.keyword}" >
-				</div>
-				<div>
-					<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
-				</div>
-			</div>
-			<!-- search{e} -->
+		
 		</div>
 	</article>
 </body>

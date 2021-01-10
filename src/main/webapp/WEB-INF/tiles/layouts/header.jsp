@@ -46,6 +46,17 @@
 		var url = "${pageContext.request.contextPath}/"+suffix;
 		location.href = url;
 	}
+	
+	// for search
+	$(document).on('click', '#searchBtn', function(e){
+		e.preventDefault();
+		console.log("btnSearch")
+		var url="/board/getBoardList";
+		url = url + "?searchType=all";
+		url = url + "&keyword=" + $('#searchword').val();
+		location.href = url;
+		console.log(url);
+	});
 
 </script>
 
@@ -98,8 +109,8 @@
        
       </ul>
       <form class="d-flex">
-        <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control mr-2" id="searchword" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" id="searchBtn" type="submit">Search</button>
       </form>
       
        <ul class="navbar-nav ml-2 mb-1 mb-lg-0">

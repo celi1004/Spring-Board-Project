@@ -31,7 +31,7 @@
 	$(document).on('click', '#btnSave', function(e){
 		e.preventDefault();
 		if ($("#title").val() == "" || contentEditor.getData()==""){
-			alert("내용을 입력해주세요.");
+			alert("Please enter title or content.");
 		}
 		else{
 			$("#form").submit();
@@ -105,14 +105,14 @@
 	<article>
 		<div class="container" role="main">
 
-			<h2 class="board_cate">Board Form</h2>
+			<h2 class="board_cate">Post Form</h2>
 
 			<form:form name="form" id="form" role="form" modelAttribute="boardVO" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
 				<form:hidden path="bid"/>
 				<input type="hidden" name="mode"/>
 				
 				<div class="mb-3">
-					<label for="cate_cd">카테고리</label>
+					<label for="cate_cd">Category</label>
 					<form:select path="cate_cd" class="form-control form-control-sm" name="category" id="category">
 						<c:forEach items="${categoryList}" var="category">
 							<form:option value="${category.code}" label="${category.code}"/>
@@ -121,29 +121,29 @@
 				</div>
 				
 				<div class="mb-3">
-					<label for="title">제목</label>
-					<form:input path="title" id="title" class="form-control" placeholder="제목을 입력해 주세요"/>
+					<label for="title">Title</label>
+					<form:input path="title" id="title" class="form-control" placeholder="Please enter the title"/>
 				</div>
 
 				<div class="mb-3">
-					<label for="reg_id">작성자</label>
-					<form:input path="reg_id" id="reg_id" class="form-control" placeholder="이름을 입력해 주세요"/>
+					<label for="reg_id">Writer</label>
+					<form:input path="reg_id" id="reg_id" class="form-control" placeholder="Please enter your username"/>
 				</div>
 
 				<div class="mb-3">
-					<label for="content">내용</label>
-					<form:textarea path="content" id="content" class="form-control" rows="10" placeholder="내용을 입력해 주세요" />
+					<label for="content">Content</label>
+					<form:textarea path="content" id="content" class="form-control" rows="10" placeholder="Please enter the content" />
 				</div>
 
 				<div class="mb-3">
 					<label for="tag">TAG</label>
-					<form:input path="tag" id="tag" class="form-control" placeholder="태그를 입력해 주세요"/>
+					<form:input path="tag" id="tag" class="form-control" placeholder="#tag"/>
 				</div>
 
 			</form:form>
 			<div class="d-grid gap-4 col-2 mx-auto">
-				<button type="button" class="btn btn-primary" id="btnSave">저장</button>
-				<button type="button" class="btn btn-primary" id="btnList">목록</button>
+				<button type="button" class="btn btn-sm btn-primary" id="btnSave" style="margin-top: 5px; width:60px;">Save</button>
+				<button type="button" class="btn btn-sm btn-primary" id="btnList" style="margin-top: 5px; width:60px;">List</button>
 			</div>
 		</div>
 	</article>

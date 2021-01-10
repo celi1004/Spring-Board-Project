@@ -23,6 +23,11 @@
 			<if test="searchType=='reg_id' and keyword != null and keyword != ''">
 				AND reg_id like CONCAT('%', #{keyword}, '%')
 			</if>
+			<if test="searchType=='all' and keyword != null and keyword !=''">
+				AND TITLE like CONCAT('%', #{keyword}, '%')
+				OR CONTENT like CONCAT('%', #{keyword}, '%')
+				OR reg_id like CONCAT('%', #{keyword}, '%')
+			</if>
 		</trim>
 		LIMIT #{startList}, #{listSize}
 	</select>
@@ -44,6 +49,11 @@
 			</if>
 			<if test="searchType=='reg_id' and keyword != null and keyword != ''">
 				AND reg_id like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='all' and keyword != null and keyword !=''">
+				AND TITLE like CONCAT('%', #{keyword}, '%')
+				OR CONTENT like CONCAT('%', #{keyword}, '%')
+				OR reg_id like CONCAT('%', #{keyword}, '%')
 			</if>
 		</trim>
 	</select>

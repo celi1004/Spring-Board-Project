@@ -12,6 +12,15 @@ body {
 	padding-bottom: 40px;
 }
 
+a{
+	color: #a3a1a1;
+}
+
+a:hover{
+	color: #333030;
+}
+
+
 .form-signin {
 	width: 100%; 
 	max-width: 330px; 
@@ -45,4 +54,57 @@ body {
 	margin-bottom: 10px;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+}
+
+.btn-primary{
+	background-color: #7C7877;
+	border-color: #7C7877;
+}
+
+.btn-primary:active,
+.btn-primary:hover{
+	background-color: #333030;
+	border-color: #333030;
+}
+
+.btn-primary:focus{
+	box-shadow: 0 0 0 0.2rem rgba(171,208,206,0.9);
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle{
+ 	background-color: #a3a1a1;
+    border-color: #ABD0CE;
+  }
+ 
+ .btn-primary:not(:disabled):not(.disabled).active:focus,
+ .btn-primary:not(:disabled):not(.disabled):active:focus,
+ .show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(171,208,206,0.9);
+}
+
+.form-control:focus{
+	border-color: #9DC3C1;
+	box-shadow: 0 0 0 0.2rem rgb(171,208,206,0.6);
+}
+
+.page-link{
+	color: #6E7783;
+	border: 1px solid #D8E6E7;
+}
+
+.page-item.active .page-link{
+	background-color: #b4d6c9;
+	border-color: #c6e5d9;
+}
+
+.page-link:hover{
+	color: #333030;
+	background-color: #dcf3f1;
+	
+}
+
+.page-link:focus{
+	box-shadow: 0 0 0 0.2rem rgba(171,208,206,0.7);
 }
